@@ -5,8 +5,18 @@ var start_timer = 0
 var total_time = 0
 var player_moving_direction = 0
 var player_direction
+
 var jumping : bool = false
 var idle : bool
+
+var collision_info
+var animationState = AnimationState.NEUTRAL
+
+enum AnimationState {
+	NEUTRAL,
+	BOUNCE
+} 
+
 
 func _process(delta):
 	inputs()
@@ -16,7 +26,10 @@ func _process(delta):
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 	
+	var tempVel = velocity
 	move_and_slide()
+	
+	calculateBounce(tempVel)
 
 
 
@@ -29,12 +42,14 @@ func calculate_jump():
 			jumping = true
 		if Input.is_action_just_released("jump") and start_timer:
 			var end_timer = Time.get_ticks_msec()
-			total_time = (start_timer - end_timer) 
+			total_time = start_timer - end_timer 
 			var jump_strength = clamp(total_time, -1200, -200)
 		
 			velocity.y = jump_strength 
 			
-			if player_moving_direction == 1:
+			
+			if player_direction == 1:
+
 				velocity.x = 400 * 1
 			elif player_moving_direction == -1:
 				velocity.x = 400 * -1
@@ -42,6 +57,17 @@ func calculate_jump():
 				velocity.x = 0
 			jumping = false
 	
+
+func calculateBounce(tempVelocity : Vector2):
+	if get_slide_collision_count() > 0 && is_on_wall():
+		print(tempVelocity)
+		var collision = get_slide_collision(0)
+		if collision != null:
+			velocity = tempVelocity.bounce(collision.get_normal())
+			velocity.x *= 0.8
+			player_direction *= -1
+			rotateSprite(player_direction)
+			#$Sprite2D.rotate(20*player_direction)
 
 func _unhandled_input(event):
 	pass
@@ -61,12 +87,11 @@ func inputs():
 		
 		elif is_on_floor():
 			velocity.x = 0
+
+		rotateSprite(direction)	
+
+	
 		
-	# ROTATION
-		if direction == 1:
-			$Sprite2D.flip_h = false
-		if direction == -1:
-			$Sprite2D.flip_h = true
 
 	
 func check_idle():
@@ -74,3 +99,11 @@ func check_idle():
 		idle = true
 	else:
 		idle = false
+
+	
+	
+func rotateSprite(direction):
+	if direction == 1:
+		$Sprite2D.flip_h = false
+	if direction == -1:
+		$Sprite2D.flip_h = true
