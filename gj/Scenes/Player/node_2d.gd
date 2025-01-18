@@ -65,6 +65,8 @@ func calculateFall(delta) :
 		print("#!!!ANIMATION FALL!!!")
 
 func getJumpStrength() :
+	if(!start_timer) :
+		return 0
 	var end_timer = Time.get_ticks_msec()
 	total_time = start_timer - end_timer 
 	print(clamp(total_time, -1200, -200))
