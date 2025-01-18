@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhxm4255qyyu4" path="res://assets/CharacterMainGamejam.png" id="2_5syt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wujbo"]
-size = Vector2(110, 84)
+size = Vector2(54.7946, 84)
 
 [node name="Node2D" type="CharacterBody2D"]
 position = Vector2(539, 256)
@@ -12,9 +12,9 @@ script = ExtResource("1_jqj0c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14)
+scale = Vector2(0.365, 0.365)
 shape = SubResource("RectangleShape2D_wujbo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 14)
-scale = Vector2(2.55, 2.55)
 texture = ExtResource("2_5syt2")
