@@ -43,16 +43,18 @@ func calculate_jump():
 		if Input.is_action_just_released("jump") and start_timer:
 			var end_timer = Time.get_ticks_msec()
 			total_time = start_timer - end_timer 
+			#Resetting Timer
+			start_timer = null
 			var jump_strength = clamp(total_time, -1200, -200)
 		
 			velocity.y = jump_strength 
 			
 			
-			if player_direction == 1:
+			if player_moving_direction == 1:
 
-				velocity.x = 400 * 1
+				velocity.x = speed * 1
 			elif player_moving_direction == -1:
-				velocity.x = 400 * -1
+				velocity.x = speed * -1
 			else:
 				velocity.x = 0
 			jumping = false
@@ -65,8 +67,8 @@ func calculateBounce(tempVelocity : Vector2):
 		if collision != null:
 			velocity = tempVelocity.bounce(collision.get_normal())
 			velocity.x *= 0.8
-			player_direction *= -1
-			rotateSprite(player_direction)
+			player_moving_direction *= -1
+			rotateSprite(player_moving_direction)
 			#$Sprite2D.rotate(20*player_direction)
 
 func _unhandled_input(event):
