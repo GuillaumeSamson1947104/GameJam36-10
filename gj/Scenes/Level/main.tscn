@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=5 format=3 uid="uid://dja0wvnhjvn0"]
 
+[ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
-[ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/Level/world.tscn" id="2_357lf"]
+[ext_resource type="PackedScene" uid="uid://dv8xgj4a75iwl" path="res://Scenes/Level/world.tscn" id="2_357lf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
@@ -11,6 +12,7 @@ normal = Vector2(0, -7.51)
 [node name="Level" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+script = ExtResource("1_bfbac")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
 position = Vector2(535, 458)
