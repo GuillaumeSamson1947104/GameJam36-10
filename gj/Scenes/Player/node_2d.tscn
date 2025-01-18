@@ -18,3 +18,5 @@ shape = SubResource("RectangleShape2D_wujbo")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 14)
 texture = ExtResource("2_5syt2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
