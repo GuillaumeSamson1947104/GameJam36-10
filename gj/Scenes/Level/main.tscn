@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dja0wvnhjvn0"]
+
+[ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
+normal = Vector2(0, -7.51)
+
+[node name="Main" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
+position = Vector2(535, 458)
+shape = SubResource("WorldBoundaryShape2D_f0r6n")
+
+[node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
+floor_constant_speed = true
