@@ -31,9 +31,9 @@ func calculate_jump():
 			velocity.y = jump_strength
 		
 			if player_direction == 1:
-				velocity.x = jump_strength * -1
+				velocity.x = 400 * 1
 			elif player_direction == -1:
-				velocity.x = jump_strength * 1
+				velocity.x = 400 * -1
 			else:
 				velocity.x = 0
 		
@@ -60,8 +60,8 @@ func inputs():
 		
 	# ROTATION
 	if direction == 1:
-		rotation_degrees = 90
+		$Sprite2D.flip_h = false
 	if direction == -1:
-		rotation_degrees = -90
+		$Sprite2D.flip_h = true
 
 	
