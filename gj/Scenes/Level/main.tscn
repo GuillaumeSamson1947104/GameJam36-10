@@ -1,5 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dja0wvnhjvn0"]
 
+[ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
 [ext_resource type="PackedScene" uid="uid://bv6dyjyvx17km" path="res://Scenes/Level/world.tscn" id="2_357lf"]
 [ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
@@ -12,6 +13,7 @@ normal = Vector2(0, -7.51)
 [node name="Level" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+script = ExtResource("1_bfbac")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
 position = Vector2(535, 458)
@@ -23,7 +25,9 @@ floor_constant_speed = true
 
 [node name="Camera2D" type="Camera2D" parent="Level/Node2D"]
 position = Vector2(0, 14)
-zoom = Vector2(2.08, 2.08)
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
