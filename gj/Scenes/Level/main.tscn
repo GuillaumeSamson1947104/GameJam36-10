@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=6 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
-[ext_resource type="PackedScene" uid="uid://bv6dyjyvx17km" path="res://Scenes/Level/world.tscn" id="2_357lf"]
+[ext_resource type="PackedScene" uid="uid://dv8xgj4a75iwl" path="res://Scenes/Level/world.tscn" id="2_357lf"]
 [ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]

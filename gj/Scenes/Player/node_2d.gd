@@ -36,7 +36,7 @@ func calculate_jump():
 			var end_timer = Time.get_ticks_msec()
 		
 			total_time = start_timer - end_timer
-			var jump_strength = clamp(total_time, -3000, -200)
+			var jump_strength = clamp(total_time, -1500, -200)
 		
 			velocity.y = jump_strength
 		
@@ -53,7 +53,7 @@ func calculate_jump():
 	#velocity = jump_strength
 
 func calculateBounce(tempVelocity : Vector2):
-	if get_slide_collision_count() > 0 && !is_on_floor():
+	if get_slide_collision_count() > 0 && is_on_wall():
 		print(tempVelocity)
 		var collision = get_slide_collision(0)
 		if collision != null:
