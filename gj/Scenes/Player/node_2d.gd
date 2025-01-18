@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @export var speed : float = 400
 const  GRAVITY = 3000
+const maxStrength = -1200
 var start_timer = 0
 var total_time = 0
 var player_moving_direction = 0
@@ -11,12 +12,13 @@ var idle : bool
 
 var collision_info
 var animationState = AnimationState.NEUTRAL
-
 enum AnimationState {
 	NEUTRAL,
-	BOUNCE
-} 
-
+	CHARGE,
+	CHARGEREADY,
+	JUMP,
+	FALL
+}
 
 func _process(delta):
 	inputs()
@@ -24,44 +26,52 @@ func _process(delta):
 	check_idle()
 	
 	if !is_on_floor():
-		velocity.y += GRAVITY * delta
+		calculateFall(delta)
+		
+	if is_on_floor() and animationState == AnimationState.FALL :
+		animationState = AnimationState.NEUTRAL
+		print("!!!ANIMATION NEUTRAL!!!")
+	
+	if is_on_floor() and animationState == AnimationState.CHARGE and getJumpStrength() == -1200 :
+		animationState = AnimationState.CHARGEREADY
+		print("#!!!ANIMATION DE CHARGEMAX!!!")
 	
 	var tempVel = velocity
 	move_and_slide()
 	
 	calculateBounce(tempVel)
 
-
-
 func calculate_jump():
 	if is_on_floor():
-		
 		if Input.is_action_just_pressed("jump"):
 			velocity.x = 0 
 			start_timer = Time.get_ticks_msec()
 			jumping = true
+			animationState = AnimationState.CHARGE
+			print("#!!!ANIMATION DE CHARGE!!!")
+			
 		if Input.is_action_just_released("jump") and start_timer:
-			var end_timer = Time.get_ticks_msec()
-			total_time = start_timer - end_timer 
 			#Resetting Timer
+			velocity.y = getJumpStrength()
+			velocity.x = speed * player_moving_direction
 			start_timer = null
-			var jump_strength = clamp(total_time, -1200, -200)
-		
-			velocity.y = jump_strength 
-			
-			
-			if player_moving_direction == 1:
-
-				velocity.x = speed * 1
-			elif player_moving_direction == -1:
-				velocity.x = speed * -1
-			else:
-				velocity.x = 0
 			jumping = false
-	
+			print("#!!!ANIMATION JUMP!!!")
+
+func calculateFall(delta) :
+	velocity.y += GRAVITY * delta
+	if animationState != AnimationState.FALL and velocity.y > 0 :
+		animationState = AnimationState.FALL
+		print("#!!!ANIMATION FALL!!!")
+
+func getJumpStrength() :
+	var end_timer = Time.get_ticks_msec()
+	total_time = start_timer - end_timer 
+	print(clamp(total_time, -1200, -200))
+	return clamp(total_time, -1200, -200)
 
 func calculateBounce(tempVelocity : Vector2):
-	if get_slide_collision_count() > 0 && is_on_wall():
+	if get_slide_collision_count() > 0 && is_on_wall_only():
 		print(tempVelocity)
 		var collision = get_slide_collision(0)
 		if collision != null:
@@ -90,19 +100,13 @@ func inputs():
 		elif is_on_floor():
 			velocity.x = 0
 
-		rotateSprite(direction)	
-
-	
-		
-
+		rotateSprite(direction)
 	
 func check_idle():
 	if velocity == Vector2(0,0):
 		idle = true
 	else:
 		idle = false
-
-	
 	
 func rotateSprite(direction):
 	if direction == 1:
