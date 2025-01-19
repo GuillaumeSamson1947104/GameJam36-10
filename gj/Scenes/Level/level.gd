@@ -48,10 +48,12 @@ func _on_level_change_3_area_entered(area: Area2D) -> void:
 	$"../ParallaxBackground/layer_2".set_visible(0)
 	$"../ParallaxBackground/layer_2/background_2".set_visible(0)
 	
-
-
 func _on_end_area_entered(area: Area2D) -> void:
 	$Node2D/Camera2D/CanvasLayer/fadeToWhite.play("fade_to_white")
+	$Node2D.velocity.y = 0
+	$Node2D.velocity.x *= 0.05
+	$Node2D.GRAVITY = 10
+	$Node2D.GRAVITY_FLOAT = 10
 
 func _on_fade_to_white_animation_finished(anim_name: StringName) -> void:
 	get_tree().change_scene_to_file("res://Scenes/End/EndScene.tscn")
