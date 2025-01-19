@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://dja0wvnhjvn0"]
+
+[ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
+[ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
+[ext_resource type="Script" path="res://Scenes/Level/main.gd" id="1_n2h17"]
+[ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/World/world.tscn" id="2_357lf"]
+[ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
+[ext_resource type="AudioStream" uid="uid://iy6jfly33x44" path="res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav" id="3_sh72k"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
+normal = Vector2(0, -7.51)
+
+[sub_resource type="Animation" id="Animation_ykxr7"]
+resource_name = "fade_to_white"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level/Node2D/Camera2D/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_77fxc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level/Node2D/Camera2D/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_egy7g"]
+_data = {
+"RESET": SubResource("Animation_77fxc"),
+"fade_to_white": SubResource("Animation_ykxr7")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_n2h17")
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+script = ExtResource("1_bfbac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
+position = Vector2(535, 458)
+shape = SubResource("WorldBoundaryShape2D_f0r6n")
+
+[node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
+collision_mask = 3
+floor_constant_speed = true
+floor_max_angle = 0.750492
+
+[node name="Camera2D" type="Camera2D" parent="Level/Node2D"]
+position = Vector2(0, 14)
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Level/Node2D/Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Level/Node2D/Camera2D/CanvasLayer"]
+offset_left = 251.0
+offset_top = 108.0
+offset_right = 828.0
+offset_bottom = 431.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="fadeToWhite" type="AnimationPlayer" parent="Level/Node2D/Camera2D/CanvasLayer"]
+root_node = NodePath("../../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_egy7g")
+}
+
+[node name="PlayerSounds" type="AudioStreamPlayer" parent="Level/Node2D"]
+stream = ExtResource("3_sh72k")
+volume_db = -20.8
+
+[node name="world" parent="." instance=ExtResource("2_357lf")]
+position = Vector2(544, 432)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.1, 0.1)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("3_8ccde")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[connection signal="finished" from="Level/Node2D/PlayerSounds" to="Level/Node2D" method="_on_player_sounds_finished"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
