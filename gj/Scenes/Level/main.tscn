@@ -1,5 +1,5 @@
+[gd_scene load_steps=11 format=3 uid="uid://dja0wvnhjvn0"]
 
-[gd_scene load_steps=10 format=3 uid="uid://dja0wvnhjvn0"] 	
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
 [ext_resource type="Script" path="res://Scenes/Level/level.gd" id="1_oiwem"]
@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
 [ext_resource type="Texture2D" uid="uid://dxn46lxxt6r1h" path="res://icon.svg" id="6_yntkq"]
 [ext_resource type="Texture2D" uid="uid://cnbe3jm7xekdl" path="res://icon2.svg" id="7_0ftof"]
-[ext_resource type="AudioStream" uid="uid://iy6jfly33x44" path="res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav" id="3_sh72k"]
-
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
@@ -17,8 +15,11 @@ normal = Vector2(0, -7.51)
 a = Vector2(329, 2)
 b = Vector2(-312, 3)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_slbho"]
+a = Vector2(915, -6)
+b = Vector2(-293, -2)
+
 [node name="Main" type="Node2D"]
-script = ExtResource("1_n2h17")
 
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("1_oiwem")
@@ -42,10 +43,8 @@ zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 
-
 [node name="PlayerSounds" type="AudioStreamPlayer" parent="Level/Node2D"]
-stream = ExtResource("3_sh72k")
-volume_db = -20.8
+volume_db = -20.0
 
 [node name="Level_change1" type="Area2D" parent="Level"]
 position = Vector2(591, -646)
@@ -59,18 +58,18 @@ position = Vector2(591, -568)
 [node name="CollisionShape2D_2" type="CollisionShape2D" parent="Level/Level_change2"]
 shape = SubResource("SegmentShape2D_kk46u")
 
-[node name="Level_change2_copy" type="Area2D" parent="Level"]
-position = Vector2(591, -1976)
+[node name="level_change2_copy" type="Area2D" parent="Level"]
+position = Vector2(0, -2011)
 
-[node name="CollisionShape2D_copy" type="CollisionShape2D" parent="Level/Level_change2_copy"]
-shape = SubResource("SegmentShape2D_kk46u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/level_change2_copy"]
+position = Vector2(401, 40)
+shape = SubResource("SegmentShape2D_slbho")
 
 [node name="Level_change3" type="Area2D" parent="Level"]
 position = Vector2(591, -2075)
 
 [node name="CollisionShape2D_3" type="CollisionShape2D" parent="Level/Level_change3"]
 shape = SubResource("SegmentShape2D_kk46u")
-
 
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
@@ -92,13 +91,8 @@ position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
 texture = ExtResource("3_8ccde")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-autoplay = true
-
-[connection signal="finished" from="Level/Node2D/PlayerSounds" to="Level/Node2D" method="_on_player_sounds_finished"]
-[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
-
 [node name="layer_2" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 position = Vector2(-184, 0)
 motion_scale = Vector2(0.1, 0.1)
 motion_offset = Vector2(500, 500)
@@ -124,8 +118,5 @@ texture = ExtResource("7_0ftof")
 
 [connection signal="area_entered" from="Level/Level_change1" to="Level" method="_on_level_change_1_area_entered"]
 [connection signal="area_entered" from="Level/Level_change2" to="Level" method="_on_level_change_2_area_entered"]
-[connection signal="area_entered" from="Level/Level_change2_copy" to="Level" method="_on_level_change_2_copy_area_entered"]
-[connection signal="area_entered" from="Level/Level_change2_copy" to="Level" method="_on_level_change_2_area_entered"]
+[connection signal="area_entered" from="Level/level_change2_copy" to="Level" method="_on_level_change_2_copy_area_entered"]
 [connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_3_area_entered"]
-[connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_2_area_entered"]
-
