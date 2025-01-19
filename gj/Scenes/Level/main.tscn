@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=15 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
@@ -54,6 +54,9 @@ b = Vector2(-312, 3)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_slbho"]
 a = Vector2(915, -6)
 b = Vector2(-293, -2)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4f5oq"]
+b = Vector2(1534, 0)
 
 [node name="Main" type="Node2D"]
 
@@ -125,6 +128,12 @@ position = Vector2(591, -2075)
 [node name="CollisionShape2D_3" type="CollisionShape2D" parent="Level/Level_change3"]
 shape = SubResource("SegmentShape2D_kk46u")
 
+[node name="end" type="Area2D" parent="Level"]
+position = Vector2(-44, -3077)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/end"]
+shape = SubResource("SegmentShape2D_4f5oq")
+
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
 
@@ -177,3 +186,4 @@ texture = ExtResource("7_0ftof")
 [connection signal="area_entered" from="Level/Level_change2" to="Level" method="_on_level_change_2_area_entered"]
 [connection signal="area_entered" from="Level/level_change2_copy" to="Level" method="_on_level_change_2_copy_area_entered"]
 [connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_3_area_entered"]
+[connection signal="area_entered" from="Level/end" to="Level" method="_on_end_area_entered"]
