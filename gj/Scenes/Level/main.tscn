@@ -20,7 +20,7 @@ position = Vector2(535, 458)
 shape = SubResource("WorldBoundaryShape2D_f0r6n")
 
 [node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
-position = Vector2(435, -219)
+position = Vector2(450, -209)
 collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 0.750492
