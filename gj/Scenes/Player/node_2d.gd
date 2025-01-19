@@ -31,7 +31,7 @@ func _process(delta):
 	inputs()
 	calculate_jump()
 	check_idle()
-
+	print(jumping)
 	if !is_on_floor():
 		calculateFall(delta)
 		
@@ -55,14 +55,15 @@ func _process(delta):
 func calculate_jump():
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
-			velocity.x = 0 
+			if ice_floor:
+				velocity.x = lerpf(velocity.x , 0 ,.3)
+			else:
+				velocity.x = 0 
 			start_timer = Time.get_ticks_msec()
 			jumping = true
 			animationState = AnimationState.CHARGE
 			kevin_animation.play("Charge")
-			
-		if Input.is_action_just_released("jump") and start_timer:
-			#Resetting Timer
+		if Input.is_action_just_released("jump") and start_timer and jumping == true:
 			velocity.y = getJumpStrength()
 			velocity.x = speed * player_moving_direction
 			start_timer = null
@@ -72,6 +73,7 @@ func calculate_jump():
 func calculateFall(delta) :
 	var gravity = GRAVITY if velocity.y < 0 else GRAVITY_FLOAT
 	velocity.y += gravity * delta
+	jumping = false
 	if animationState != AnimationState.FALL and velocity.y > 0 :
 		animationState = AnimationState.FALL
 		kevin_animation.play("Falling")
@@ -87,7 +89,6 @@ func calculateBounce(tempVelocity : Vector2):
 	if get_slide_collision_count() > 0 && is_on_wall_only():
 		var collision = get_slide_collision(0)
 		if(collision.get_angle() < 1):
-			print(velocity)
 			return
 		velocity = tempVelocity.bounce(collision.get_normal())
 		velocity.x *= 0.8
@@ -111,7 +112,7 @@ func inputs():
 		if ice_floor:
 			if direction:
 				
-				velocity.x = lerpf(velocity.x, direction *speed, .2)
+				velocity.x = lerpf(velocity.x, direction *speed, .1)
 			else:
 				#velocity.x = 0
 				velocity.x = lerpf(velocity.x , 0 , 0.03)
@@ -138,11 +139,11 @@ func rotateSprite(direction):
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is TileMapLayer:
 		current_tilemap = body
-		print("Tilemap")
+		#print("Tilemap")
 		var collided_tiles_coords = current_tilemap.get_coords_for_body_rid(body_rid)
 		var tile_data = current_tilemap.get_cell_tile_data(collided_tiles_coords)
 		var terrain_mask = tile_data.get_custom_data_by_layer_id(0)
-		print(terrain_mask)
+		#print(terrain_mask)
 		if terrain_mask == 2:
 			ice_floor = true
 		else:
