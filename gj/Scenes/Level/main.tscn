@@ -20,6 +20,7 @@ position = Vector2(535, 458)
 shape = SubResource("WorldBoundaryShape2D_f0r6n")
 
 [node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
+position = Vector2(435, -219)
 collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 0.750492
@@ -34,6 +35,10 @@ position_smoothing_enabled = true
 position = Vector2(544, 432)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+visible = false
+color = Color(0.15967, 0.15967, 0.15967, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-184, 0)
