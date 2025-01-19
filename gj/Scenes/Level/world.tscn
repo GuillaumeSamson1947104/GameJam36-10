@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://4pmo6li7r7qt"]
+[gd_scene load_steps=7 format=4 uid="uid://df8l7tvwqh0aj"]
 
 [ext_resource type="Texture2D" uid="uid://245b21y83g16" path="res://assets/CloudTileMap.png" id="1_vc80f"]
 [ext_resource type="Texture2D" uid="uid://dcrkm4d0dpq4m" path="res://assets/Ice.png" id="2_63b21"]

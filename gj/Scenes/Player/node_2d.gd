@@ -27,7 +27,8 @@ enum AnimationState {
 	WALK
 }
 
-const soundWalk = preload("res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav")
+const soundWalkCloud = preload("res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav")
+const soundWalkIce = preload("res://assets/Sounds/ESM_GF_fx_concrete_one_shots_footstep_sneakers_walking_dry_punchy_crispy_interior_8.wav")
 const soundFall = preload("res://assets/Sounds/WindGusts_BW.59811.wav")
 const soundFlap = preload("res://assets/Sounds/MonsterWingsFlap_SFXB.1452.wav")
 const soundFast = preload("res://assets/Sounds/SPLC-0595_FX_Oneshot_Wind_Storm_Strong.wav")
@@ -179,7 +180,7 @@ func setAnimationState(state: AnimationState) :
 			$PlayerSounds.play()
 		AnimationState.WALK:
 			animationState = AnimationState.WALK
-			$PlayerSounds.stream = soundWalk
+			$PlayerSounds.stream = soundWalkIce if ice_floor else soundWalkCloud
 			kevin_animation.play("Idle")
 			$PlayerSounds.play()
 
