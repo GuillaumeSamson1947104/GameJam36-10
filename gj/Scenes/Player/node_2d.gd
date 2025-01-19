@@ -1,6 +1,9 @@
 extends CharacterBody2D
+@onready var world_scene = preload("res://Scenes/World/world.tscn").instantiate()
 @onready var kevin_animation = $KevinAnimation
+#@onready var tilemap : TileMap = $TileMapLayer
 @export var speed : float = 400
+
 const  GRAVITY = 3000
 const GRAVITY_FLOAT = 800
 const maxStrength = -1200
@@ -8,10 +11,11 @@ var start_timer = 0
 var total_time = 0
 var player_moving_direction = 0
 var player_direction
-
+var current_tilemap 
+var tile_mask
 var jumping : bool = false
 var idle : bool
-
+var ice_floor = false
 var collision_info
 var animationState = AnimationState.NEUTRAL
 enum AnimationState {
@@ -22,15 +26,20 @@ enum AnimationState {
 	FALL
 }
 
+
 func _process(delta):
 	inputs()
 	calculate_jump()
 	check_idle()
-	
+
 	if !is_on_floor():
 		calculateFall(delta)
 		
 	if is_on_floor() and animationState == AnimationState.FALL :
+	#	
+		var collision = get_slide_collision(0)
+		
+		
 		animationState = AnimationState.NEUTRAL
 		kevin_animation.play("Idle")
 	
@@ -99,14 +108,20 @@ func inputs():
 			player_moving_direction = direction
 			start_timer = null
 	# MOVEMENT
-		if direction:
-			velocity.x = direction * speed
-		
-		elif is_on_floor():
-			velocity.x = 0
-
+		if ice_floor:
+			if direction:
+				
+				velocity.x = lerpf(velocity.x, direction *speed, .2)
+			else:
+				#velocity.x = 0
+				velocity.x = lerpf(velocity.x , 0 , 0.03)
+			#rotateSprite(direction)
+		else:
+			if direction:
+				velocity.x = direction * speed
+			else:
+				velocity.x = 0
 		rotateSprite(direction)
-	
 func check_idle():
 	if velocity == Vector2(0,0):
 		idle = true
@@ -118,3 +133,20 @@ func rotateSprite(direction):
 		$KevinAnimation.flip_h = false
 	if direction == -1:
 		$KevinAnimation.flip_h = true
+
+
+func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body is TileMapLayer:
+		current_tilemap = body
+		print("Tilemap")
+		var collided_tiles_coords = current_tilemap.get_coords_for_body_rid(body_rid)
+		var tile_data = current_tilemap.get_cell_tile_data(collided_tiles_coords)
+		var terrain_mask = tile_data.get_custom_data_by_layer_id(0)
+		print(terrain_mask)
+		if terrain_mask == 2:
+			ice_floor = true
+		else:
+			ice_floor = false
+	
+	
+	#var collided_tiles_coords = current_tilemap.get_coords_for_body_rid(body_rid)
