@@ -3,8 +3,8 @@ extends CharacterBody2D
 @onready var kevin_animation = $KevinAnimation
 #@onready var tilemap : TileMap = $TileMapLayer
 @export var speed : float = 400
-const  GRAVITY = 3000
-const GRAVITY_FLOAT = 800
+var  GRAVITY = 3000
+var GRAVITY_FLOAT = 800
 const maxStrength = -1200
 var start_timer = 0
 var total_time = 0
