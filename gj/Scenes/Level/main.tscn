@@ -65,6 +65,7 @@ shape = SubResource("SegmentShape2D_kk46u")
 
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
+script = null
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -111,5 +112,5 @@ texture = ExtResource("7_0ftof")
 [connection signal="area_entered" from="Level/Level_change2" to="Level" method="_on_level_change_2_area_entered"]
 [connection signal="area_entered" from="Level/Level_change2_copy" to="Level" method="_on_level_change_2_copy_area_entered"]
 [connection signal="area_entered" from="Level/Level_change2_copy" to="Level" method="_on_level_change_2_area_entered"]
-[connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_3_area_entered"]
 [connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_2_area_entered"]
+[connection signal="area_entered" from="Level/Level_change3" to="Level" method="_on_level_change_3_area_entered"]
