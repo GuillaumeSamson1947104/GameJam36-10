@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=8 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
-[ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/World/world.tscn" id="2_357lf"]
-[ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
+<<<<<<< Updated upstream
+
+
+=======
+[ext_resource type="PackedScene" uid="uid://bv6dyjyvx17km" path="res://Scenes/Level/world.tscn" id="2_357lf"]
+[ext_resource type="Texture2D" uid="uid://47cimgkst0hg" path="res://assets/BackgroundCloudlayer0.png" id="4_ted1q"]
+[ext_resource type="Texture2D" uid="uid://phallw0cbi2w" path="res://assets/BackgroundCloudlayer1.png" id="5_d7ynu"]
+[ext_resource type="Texture2D" uid="uid://s55i0vnmxn1r" path="res://assets/cloudfog2.png" id="7_7lbai"]
+>>>>>>> Stashed changes
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
@@ -44,4 +51,26 @@ motion_mirroring = Vector2(832, 704)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
-texture = ExtResource("3_8ccde")
+texture = ExtResource("4_ted1q")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.3, 0.3)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("7_7lbai")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("5_d7ynu")
