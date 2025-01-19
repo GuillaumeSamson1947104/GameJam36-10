@@ -493,16 +493,13 @@ tile_map_data = PackedByteArray("AAD9/2L/AAAGAAEAAAD8/2L/AAAEAAEAAAD7/2L/AAAJAAA
 tile_set = SubResource("TileSet_ikr12")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-position = Vector2(192, -2608)
-enabled = false
+visible = false
+position = Vector2(176, -2320)
 color = Color(0.627451, 0.627451, 0.627451, 0.192157)
 energy = 4.51
 
 [node name="Lightning" type="Timer" parent="DirectionalLight2D"]
 wait_time = 4.0
 autostart = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.15967, 0.15967, 0.15967, 1)
 
 [connection signal="timeout" from="DirectionalLight2D/Lightning" to="." method="_on_lightning_timeout"]

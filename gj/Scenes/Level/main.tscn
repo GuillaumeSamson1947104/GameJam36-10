@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=16 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
 [ext_resource type="Script" path="res://Scenes/Level/level.gd" id="1_oiwem"]
 [ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/World/world.tscn" id="2_357lf"]
-[ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
+[ext_resource type="Texture2D" uid="uid://cv4c8r5508lvm" path="res://assets/BackgroundCloudlayer0.png" id="5_5yuvq"]
+[ext_resource type="Texture2D" uid="uid://kvxuvlcnvsqk" path="res://assets/cloudfog2.png" id="6_qg5ax"]
 [ext_resource type="Texture2D" uid="uid://dxn46lxxt6r1h" path="res://icon.svg" id="6_yntkq"]
-[ext_resource type="Texture2D" uid="uid://cnbe3jm7xekdl" path="res://icon2.svg" id="7_0ftof"]
+[ext_resource type="Texture2D" uid="uid://d0tx5l30lop61" path="res://assets/BackgroundCloudlayer1.png" id="7_lk1pq"]
+[ext_resource type="Texture2D" uid="uid://cnoutq773iadl" path="res://assets/BackgrounddarkCloudlayer0.png" id="8_hdh0m"]
+[ext_resource type="Texture2D" uid="uid://cc6d7xby32b0t" path="res://assets/BackgroundDarkcloudlayer1.png" id="9_konob"]
+[ext_resource type="Texture2D" uid="uid://cwwc3lu5hd75j" path="res://assets/BackgroundDarkcloudstrikelayer1.png" id="10_s41et"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
@@ -18,6 +22,20 @@ b = Vector2(-312, 3)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_slbho"]
 a = Vector2(915, -6)
 b = Vector2(-293, -2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8p55w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_konob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s41et")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 
@@ -75,47 +93,84 @@ shape = SubResource("SegmentShape2D_kk46u")
 position = Vector2(544, 432)
 script = null
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="Backgrounds" type="Node" parent="."]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+[node name="CanvasModulate" type="CanvasModulate" parent="Backgrounds"]
 visible = false
 color = Color(0.15967, 0.15967, 0.15967, 1)
 
-[node name="layer_1" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="base_and_snowback" type="ParallaxBackground" parent="Backgrounds"]
+
+[node name="base_layer0" type="ParallaxLayer" parent="Backgrounds/base_and_snowback"]
 position = Vector2(-184, 0)
 motion_scale = Vector2(0.1, 0.1)
 motion_offset = Vector2(500, 500)
 motion_mirroring = Vector2(832, 704)
 
-[node name="background_1" type="Sprite2D" parent="ParallaxBackground/layer_1"]
+[node name="background_1" type="Sprite2D" parent="Backgrounds/base_and_snowback/base_layer0"]
 position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
-texture = ExtResource("3_8ccde")
+texture = ExtResource("5_5yuvq")
 
-[node name="layer_2" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="base_layer1" type="ParallaxLayer" parent="Backgrounds/base_and_snowback"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.3, 0.3)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="background_1" type="Sprite2D" parent="Backgrounds/base_and_snowback/base_layer1"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("6_qg5ax")
+
+[node name="base_layer2" type="ParallaxLayer" parent="Backgrounds/base_and_snowback"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="background_1" type="Sprite2D" parent="Backgrounds/base_and_snowback/base_layer2"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("7_lk1pq")
+
+[node name="darkcloud" type="ParallaxBackground" parent="Backgrounds"]
+visible = false
+
+[node name="darkcloud_layer0" type="ParallaxLayer" parent="Backgrounds/darkcloud"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.1, 0.1)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="background_3" type="Sprite2D" parent="Backgrounds/darkcloud/darkcloud_layer0"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.004, 11)
+texture = ExtResource("8_hdh0m")
+
+[node name="darkcloud_layer1" type="ParallaxLayer" parent="Backgrounds/darkcloud"]
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="background_3" type="AnimatedSprite2D" parent="Backgrounds/darkcloud/darkcloud_layer1"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.004, 11)
+sprite_frames = SubResource("SpriteFrames_8p55w")
+
+[node name="layer_2" type="ParallaxLayer" parent="Backgrounds"]
 visible = false
 position = Vector2(-184, 0)
 motion_scale = Vector2(0.1, 0.1)
 motion_offset = Vector2(500, 500)
 motion_mirroring = Vector2(832, 704)
 
-[node name="background_2" type="Sprite2D" parent="ParallaxBackground/layer_2"]
+[node name="background_2" type="Sprite2D" parent="Backgrounds/layer_2"]
+visible = false
 position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
 texture = ExtResource("6_yntkq")
-
-[node name="layer_3" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
-position = Vector2(-184, 0)
-motion_scale = Vector2(0.1, 0.1)
-motion_offset = Vector2(500, 500)
-motion_mirroring = Vector2(832, 704)
-
-[node name="background_3" type="Sprite2D" parent="ParallaxBackground/layer_3"]
-modulate = Color(1, 0.156863, 1, 1)
-position = Vector2(728.14, 224)
-scale = Vector2(13.004, 11)
-texture = ExtResource("7_0ftof")
 
 [connection signal="area_entered" from="Level/Level_change1" to="Level" method="_on_level_change_1_area_entered"]
 [connection signal="area_entered" from="Level/Level_change2" to="Level" method="_on_level_change_2_area_entered"]
