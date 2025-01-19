@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var kevin_animation = $KevinAnimation
 #@onready var tilemap : TileMap = $TileMapLayer
 @export var speed : float = 400
-
 const  GRAVITY = 3000
 const GRAVITY_FLOAT = 800
 const maxStrength = -1200
@@ -38,6 +37,7 @@ func _process(delta):
 	inputs()
 	calculate_jump()
 	check_idle()
+
 	if !is_on_floor():
 		calculateFall(delta)
 		
@@ -118,7 +118,7 @@ func inputs():
 		if ice_floor:
 			if direction:
 				
-				velocity.x = lerpf(velocity.x, direction *speed, .1)
+				velocity.x = lerpf(velocity.x, direction * speed, .1)
 			else:
 				#velocity.x = 0
 				velocity.x = lerpf(velocity.x , 0 , 0.03)
