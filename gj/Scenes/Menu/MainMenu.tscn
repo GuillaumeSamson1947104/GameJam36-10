@@ -1,7 +1,142 @@
-[gd_scene load_steps=3 format=3 uid="uid://b75i22xbmnd7h"]
+[gd_scene load_steps=36 format=3 uid="uid://b75i22xbmnd7h"]
 
 [ext_resource type="Script" path="res://Scenes/Menu/main_menu.gd" id="1_mq54f"]
-[ext_resource type="Texture2D" uid="uid://dxn46lxxt6r1h" path="res://icon.svg" id="1_ydo80"]
+[ext_resource type="Texture2D" uid="uid://ctmmvayiacmg2" path="res://assets/Animation/Menu/Machine/Machine1.png" id="3_hmibb"]
+[ext_resource type="Texture2D" uid="uid://c8cwo3u4i05to" path="res://assets/Animation/Menu/Machine/Machine2.png" id="4_gasoi"]
+[ext_resource type="Texture2D" uid="uid://44h0dlmv73g" path="res://assets/Animation/Menu/Button die/button_die (2).png" id="5_7qbcm"]
+[ext_resource type="Texture2D" uid="uid://dpvbfqxq8pkb0" path="res://assets/Animation/Menu/Die/finished cut scene1.png" id="5_e1xrr"]
+[ext_resource type="Texture2D" uid="uid://b61fyfp3ghvob" path="res://assets/Animation/Menu/Machine/Machine3.png" id="5_s87ap"]
+[ext_resource type="Texture2D" uid="uid://ovcuvnso7lyl" path="res://assets/Animation/Menu/Button die/button_die (4).png" id="6_4cgsk"]
+[ext_resource type="Texture2D" uid="uid://dsgdig2luit7b" path="res://assets/Animation/Menu/Die/finished cut scene2.png" id="6_rni2v"]
+[ext_resource type="Texture2D" uid="uid://cnc4eyw106nas" path="res://assets/Animation/Menu/Die/finished cut scene3.png" id="7_3g1fs"]
+[ext_resource type="Texture2D" uid="uid://cmnmsjcwicu1l" path="res://assets/Animation/Menu/Die/finished cut scene4.png" id="8_bksjg"]
+[ext_resource type="Texture2D" uid="uid://coly6xjuq10sa" path="res://assets/Animation/Menu/Die/finished cut scene5.png" id="9_cs0ip"]
+[ext_resource type="Texture2D" uid="uid://dw0bn5q4y70es" path="res://assets/Animation/Menu/Die/finished cut scene6.png" id="10_i0qjo"]
+[ext_resource type="Texture2D" uid="uid://c5uj7pukntl6y" path="res://assets/Animation/Menu/Die/finished cut scene7.png" id="11_j744f"]
+[ext_resource type="Texture2D" uid="uid://u7abso3ersvg" path="res://assets/Animation/Menu/Die/finished cut scene8.png" id="12_7r80j"]
+[ext_resource type="Texture2D" uid="uid://b85qny2j72mby" path="res://assets/Animation/Menu/Die/finished cut scene9.png" id="13_mh3t1"]
+[ext_resource type="Texture2D" uid="uid://dj8s3mm2ucgux" path="res://assets/Animation/Menu/Die/finished cut scene10.png" id="14_tkckp"]
+[ext_resource type="Texture2D" uid="uid://b7casqc2akq1i" path="res://assets/Animation/Menu/Die/finished cut scene11.png" id="15_on8r7"]
+[ext_resource type="Texture2D" uid="uid://7puj1qxfb5wt" path="res://assets/Animation/Menu/Die/finished cut scene12.png" id="16_nrdo6"]
+[ext_resource type="Texture2D" uid="uid://3iej1c235rox" path="res://assets/Animation/Menu/Die/finished cut scene13.png" id="17_ref2h"]
+[ext_resource type="Texture2D" uid="uid://cq7ipicetdle3" path="res://assets/Animation/Menu/Die/finished cut scene14.png" id="18_k4btv"]
+[ext_resource type="Texture2D" uid="uid://dq4amgmrd2k1n" path="res://assets/Animation/Menu/Die/finished cut scene15.png" id="19_8poa2"]
+[ext_resource type="Texture2D" uid="uid://ccofskpcl2jki" path="res://assets/Animation/Menu/Die/finished cut scene16.png" id="20_52o2f"]
+[ext_resource type="Texture2D" uid="uid://dfsct0qxy3hrf" path="res://assets/Animation/Menu/Die/finished cut scene17.png" id="21_jvtqj"]
+[ext_resource type="Texture2D" uid="uid://bud3rlgav6fxc" path="res://assets/Animation/Menu/Die/finished cut scene18.png" id="22_41j28"]
+[ext_resource type="Texture2D" uid="uid://cfm18j58230rw" path="res://assets/Animation/Menu/Die/finished cut scene19.png" id="23_f8755"]
+
+[sub_resource type="Gradient" id="Gradient_26hr1"]
+offsets = PackedFloat32Array(0, 0.5, 0.996689, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.541176, 0.658824, 0.627451, 1, 0.913907, 0.913907, 0.913907, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x8fkc"]
+gradient = SubResource("Gradient_26hr1")
+
+[sub_resource type="Gradient" id="Gradient_y7io3"]
+offsets = PackedFloat32Array(0, 0.533113, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.541176, 0.658824, 0.627451, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6go58"]
+gradient = SubResource("Gradient_y7io3")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5ndug"]
+diffuse_texture = SubResource("GradientTexture2D_x8fkc")
+specular_texture = SubResource("GradientTexture2D_6go58")
+specular_color = Color(0.596078, 0.866667, 0.921569, 1)
+
+[sub_resource type="Gradient" id="Gradient_jks1t"]
+offsets = PackedFloat32Array(0, 0.511976, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.541176, 0.658824, 0.627451, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8k46l"]
+gradient = SubResource("Gradient_jks1t")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y3btw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hmibb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gasoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s87ap")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_e1xrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rni2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3g1fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bksjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cs0ip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_i0qjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j744f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7r80j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_mh3t1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tkckp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_on8r7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nrdo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ref2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_k4btv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_8poa2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_52o2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jvtqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_41j28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_f8755")
+}],
+"loop": true,
+"name": &"start",
+"speed": 5.0
+}]
+
+[sub_resource type="SystemFont" id="SystemFont_cf2jc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ucbmw"]
+font = SubResource("SystemFont_cf2jc")
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +147,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mq54f")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("CanvasTexture_5ndug")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_8k46l")
+expand_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -19,10 +172,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 120
+theme_override_constants/margin_left = 90
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 120
 theme_override_constants/margin_bottom = 80
+
+[node name="MenuAnimationLoop" type="AnimatedSprite2D" parent="MarginContainer"]
+scale = Vector2(5.06, 5.06)
+sprite_frames = SubResource("SpriteFrames_y3btw")
+autoplay = "default"
+frame_progress = 0.302564
+centered = false
+offset = Vector2(50, 0)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -30,29 +191,30 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Title" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_ydo80")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Start" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("1_ydo80")
+text = "DTJ36 #10
+Samuel Pelletier
+Loïc Duchêne-Hamel
+Guillaume Samson"
+label_settings = SubResource("LabelSettings_ucbmw")
 
-[node name="Team_Version" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_ydo80")
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ydo80")
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[node name="Start" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_7qbcm")
+texture_hover = ExtResource("6_4cgsk")
+
+[connection signal="animation_looped" from="MarginContainer/MenuAnimationLoop" to="." method="_on_menu_animation_loop_animation_looped"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/Start" to="." method="_on_start_pressed"]
