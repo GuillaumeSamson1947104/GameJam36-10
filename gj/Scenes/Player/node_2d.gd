@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var kevin_animation = $KevinAnimation
 @export var speed : float = 400
 const  GRAVITY = 3000
 const maxStrength = -1200
@@ -30,11 +31,11 @@ func _process(delta):
 		
 	if is_on_floor() and animationState == AnimationState.FALL :
 		animationState = AnimationState.NEUTRAL
-		print("!!!ANIMATION NEUTRAL!!!")
+		kevin_animation.play("Idle")
 	
 	if is_on_floor() and animationState == AnimationState.CHARGE and getJumpStrength() == -1200 :
 		animationState = AnimationState.CHARGEREADY
-		print("#!!!ANIMATION DE CHARGEMAX!!!")
+		kevin_animation.play("ChargeMax")
 	
 	var tempVel = velocity
 	move_and_slide()
@@ -48,7 +49,7 @@ func calculate_jump():
 			start_timer = Time.get_ticks_msec()
 			jumping = true
 			animationState = AnimationState.CHARGE
-			print("#!!!ANIMATION DE CHARGE!!!")
+			kevin_animation.play("Charge")
 			
 		if Input.is_action_just_released("jump") and start_timer:
 			#Resetting Timer
@@ -56,13 +57,13 @@ func calculate_jump():
 			velocity.x = speed * player_moving_direction
 			start_timer = null
 			jumping = false
-			print("#!!!ANIMATION JUMP!!!")
+			kevin_animation.play("Midair")
 
 func calculateFall(delta) :
 	velocity.y += GRAVITY * delta
 	if animationState != AnimationState.FALL and velocity.y > 0 :
 		animationState = AnimationState.FALL
-		print("#!!!ANIMATION FALL!!!")
+		kevin_animation.play("Falling")
 
 func getJumpStrength() :
 	if(!start_timer) :
@@ -112,6 +113,6 @@ func check_idle():
 	
 func rotateSprite(direction):
 	if direction == 1:
-		$Sprite2D.flip_h = false
+		$AnimatedSprite.flip_h = false
 	if direction == -1:
-		$Sprite2D.flip_h = true
+		$AnimatedSprite.flip_h = true

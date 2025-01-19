@@ -1,12 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://rimbg85q70ho"]
+[gd_scene load_steps=9 format=3 uid="uid://rimbg85q70ho"]
 
 [ext_resource type="Script" path="res://Scenes/Player/node_2d.gd" id="1_jqj0c"]
-[ext_resource type="Texture2D" uid="uid://bhxm4255qyyu4" path="res://assets/CharacterMainGamejam.png" id="2_5syt2"]
+[ext_resource type="Texture2D" uid="uid://d0qgo3orqm5ml" path="res://assets/Animation/Charge/Charge1.png" id="2_o8wge"]
+[ext_resource type="Texture2D" uid="uid://bosd4hdy3q5q3" path="res://assets/Animation/Charge/ChargeMax.png" id="3_8enq4"]
+[ext_resource type="Texture2D" uid="uid://0pxokbxrdqfh" path="res://assets/Animation/Midair/Kevinfalling1.png" id="4_r2hv3"]
+[ext_resource type="Texture2D" uid="uid://4b4n06yiqlcf" path="res://assets/Animation/Idle/Idle1.png" id="5_auadr"]
+[ext_resource type="Texture2D" uid="uid://bnt2l8sm0bxot" path="res://assets/Animation/Midair/kevinmidair1.png" id="6_wauvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wujbo"]
 size = Vector2(54.7946, 84)
 
-[node name="Node2D" type="CharacterBody2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_61f0u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o8wge")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8enq4")
+}],
+"loop": true,
+"name": &"ChargeMax",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_r2hv3")
+}],
+"loop": true,
+"name": &"Falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_auadr")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wauvj")
+}],
+"loop": true,
+"name": &"Midair",
+"speed": 5.0
+}]
+
+[node name="Kevin" type="CharacterBody2D"]
 position = Vector2(539, 256)
 script = ExtResource("1_jqj0c")
 
@@ -15,8 +62,7 @@ position = Vector2(0, 14)
 scale = Vector2(0.365, 0.365)
 shape = SubResource("RectangleShape2D_wujbo")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="KevinAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 14)
-texture = ExtResource("2_5syt2")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+sprite_frames = SubResource("SpriteFrames_61f0u")
+animation = &"Idle"

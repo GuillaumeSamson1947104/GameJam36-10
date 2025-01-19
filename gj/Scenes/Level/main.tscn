@@ -22,6 +22,7 @@ shape = SubResource("WorldBoundaryShape2D_f0r6n")
 [node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
 collision_mask = 3
 floor_constant_speed = true
+floor_max_angle = 0.750492
 
 [node name="Camera2D" type="Camera2D" parent="Level/Node2D"]
 position = Vector2(0, 14)
