@@ -115,6 +115,6 @@ func check_idle():
 	
 func rotateSprite(direction):
 	if direction == 1:
-		$AnimatedSprite.flip_h = false
+		$KevinAnimation.flip_h = false
 	if direction == -1:
-		$AnimatedSprite.flip_h = true
+		$KevinAnimation.flip_h = true
