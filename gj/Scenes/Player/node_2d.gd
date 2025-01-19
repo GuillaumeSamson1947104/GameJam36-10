@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @export var speed : float = 400
 const  GRAVITY = 3000
+const GRAVITY_FLOAT = 800
 const maxStrength = -1200
 var start_timer = 0
 var total_time = 0
@@ -59,7 +60,8 @@ func calculate_jump():
 			print("#!!!ANIMATION JUMP!!!")
 
 func calculateFall(delta) :
-	velocity.y += GRAVITY * delta
+	var gravity = GRAVITY if velocity.y < 0 else GRAVITY_FLOAT
+	velocity.y += gravity * delta
 	if animationState != AnimationState.FALL and velocity.y > 0 :
 		animationState = AnimationState.FALL
 		print("#!!!ANIMATION FALL!!!")
