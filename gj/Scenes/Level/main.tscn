@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=8 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
+[ext_resource type="Script" path="res://Scenes/Level/main.gd" id="1_n2h17"]
 [ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/World/world.tscn" id="2_357lf"]
 [ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
+[ext_resource type="AudioStream" uid="uid://iy6jfly33x44" path="res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav" id="3_sh72k"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_n2h17")
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -30,6 +33,10 @@ zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 
+[node name="PlayerSounds" type="AudioStreamPlayer" parent="Level/Node2D"]
+stream = ExtResource("3_sh72k")
+volume_db = -20.8
+
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
 
@@ -45,3 +52,9 @@ motion_mirroring = Vector2(832, 704)
 position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
 texture = ExtResource("3_8ccde")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[connection signal="finished" from="Level/Node2D/PlayerSounds" to="Level/Node2D" method="_on_player_sounds_finished"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

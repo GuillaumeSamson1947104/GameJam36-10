@@ -23,29 +23,32 @@ enum AnimationState {
 	CHARGE,
 	CHARGEREADY,
 	JUMP,
-	FALL
+	FALL,
+	WALK
 }
+
+const soundWalk = preload("res://assets/Sounds/ESM_GF_fx_dirt_one_shots_footstep_sand_boots_dry_interior_67.wav")
+const soundFall = preload("res://assets/Sounds/WindGusts_BW.59811.wav")
+const soundFlap = preload("res://assets/Sounds/MonsterWingsFlap_SFXB.1452.wav")
+const soundFast = preload("res://assets/Sounds/SPLC-0595_FX_Oneshot_Wind_Storm_Strong.wav")
 
 
 func _process(delta):
 	inputs()
 	calculate_jump()
 	check_idle()
-	print(jumping)
 	if !is_on_floor():
 		calculateFall(delta)
 		
-	if is_on_floor() and animationState == AnimationState.FALL :
+	if is_on_floor() and (animationState == AnimationState.FALL) :
 	#	
 		var collision = get_slide_collision(0)
 		
 		
-		animationState = AnimationState.NEUTRAL
-		kevin_animation.play("Idle")
+		setAnimationState(AnimationState.NEUTRAL)
 	
 	if is_on_floor() and animationState == AnimationState.CHARGE and getJumpStrength() == -1200 :
-		animationState = AnimationState.CHARGEREADY
-		kevin_animation.play("ChargeMax")
+		setAnimationState(AnimationState.CHARGEREADY)
 	
 	var tempVel = velocity
 	move_and_slide()
@@ -61,22 +64,20 @@ func calculate_jump():
 				velocity.x = 0 
 			start_timer = Time.get_ticks_msec()
 			jumping = true
-			animationState = AnimationState.CHARGE
-			kevin_animation.play("Charge")
+			setAnimationState(AnimationState.CHARGE)
 		if Input.is_action_just_released("jump") and start_timer and jumping == true:
 			velocity.y = getJumpStrength()
 			velocity.x = speed * player_moving_direction
 			start_timer = null
 			jumping = false
-			kevin_animation.play("Midair")
+			setAnimationState(AnimationState.JUMP)
 
 func calculateFall(delta) :
 	var gravity = GRAVITY if velocity.y < 0 else GRAVITY_FLOAT
 	velocity.y += gravity * delta
 	jumping = false
 	if animationState != AnimationState.FALL and velocity.y > 0 :
-		animationState = AnimationState.FALL
-		kevin_animation.play("Falling")
+		setAnimationState(AnimationState.FALL)
 
 func getJumpStrength() :
 	if(!start_timer) :
@@ -108,6 +109,10 @@ func inputs():
 		if direction != 0:
 			player_moving_direction = direction
 			start_timer = null
+			if(animationState != AnimationState.WALK) :
+				setAnimationState(AnimationState.WALK)
+		elif (animationState == AnimationState.WALK) :
+			setAnimationState(AnimationState.NEUTRAL)
 	# MOVEMENT
 		if ice_floor:
 			if direction:
@@ -139,15 +144,45 @@ func rotateSprite(direction):
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is TileMapLayer:
 		current_tilemap = body
-		#print("Tilemap")
 		var collided_tiles_coords = current_tilemap.get_coords_for_body_rid(body_rid)
 		var tile_data = current_tilemap.get_cell_tile_data(collided_tiles_coords)
 		var terrain_mask = tile_data.get_custom_data_by_layer_id(0)
-		#print(terrain_mask)
 		if terrain_mask == 2:
 			ice_floor = true
 		else:
 			ice_floor = false
 	
-	
-	#var collided_tiles_coords = current_tilemap.get_coords_for_body_rid(body_rid)
+func setAnimationState(state: AnimationState) :
+	print(state)
+	match state:
+		AnimationState.NEUTRAL:
+			animationState = AnimationState.NEUTRAL
+			kevin_animation.play("Idle")
+			$PlayerSounds.stream = null
+		AnimationState.CHARGE:
+			animationState = AnimationState.CHARGE
+			kevin_animation.play("Charge")
+			$PlayerSounds.stream = null
+		AnimationState.CHARGEREADY:
+			animationState = AnimationState.CHARGEREADY
+			kevin_animation.play("ChargeMax")
+			$PlayerSounds.stream = null
+		AnimationState.JUMP:
+			animationState = AnimationState.JUMP
+			kevin_animation.play("Midair")
+			$PlayerSounds.stream = soundFlap
+			$PlayerSounds.play()
+		AnimationState.FALL:
+			animationState = AnimationState.FALL
+			$PlayerSounds.stream = soundFall
+			kevin_animation.play("Falling")
+			$PlayerSounds.play()
+		AnimationState.WALK:
+			animationState = AnimationState.WALK
+			$PlayerSounds.stream = soundWalk
+			kevin_animation.play("Idle")
+			$PlayerSounds.play()
+
+
+func _on_player_sounds_finished() -> void:
+	$PlayerSounds.play()

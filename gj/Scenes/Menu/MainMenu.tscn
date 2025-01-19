@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b75i22xbmnd7h"]
+[gd_scene load_steps=37 format=3 uid="uid://b75i22xbmnd7h"]
 
 [ext_resource type="Script" path="res://Scenes/Menu/main_menu.gd" id="1_mq54f"]
 [ext_resource type="Texture2D" uid="uid://ctmmvayiacmg2" path="res://assets/Animation/Menu/Machine/Machine1.png" id="3_hmibb"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dfsct0qxy3hrf" path="res://assets/Animation/Menu/Die/finished cut scene17.png" id="21_jvtqj"]
 [ext_resource type="Texture2D" uid="uid://bud3rlgav6fxc" path="res://assets/Animation/Menu/Die/finished cut scene18.png" id="22_41j28"]
 [ext_resource type="Texture2D" uid="uid://cfm18j58230rw" path="res://assets/Animation/Menu/Die/finished cut scene19.png" id="23_f8755"]
+[ext_resource type="AudioStream" uid="uid://cw0wlpbh4ki18" path="res://assets/Sounds/shortbeep.wav" id="26_3721q"]
 
 [sub_resource type="Gradient" id="Gradient_26hr1"]
 offsets = PackedFloat32Array(0, 0.5, 0.996689, 1)
@@ -181,7 +182,7 @@ theme_override_constants/margin_bottom = 80
 scale = Vector2(5.06, 5.06)
 sprite_frames = SubResource("SpriteFrames_y3btw")
 autoplay = "default"
-frame_progress = 0.302564
+frame_progress = 0.695144
 centered = false
 offset = Vector2(50, 0)
 
@@ -216,5 +217,11 @@ layout_mode = 2
 texture_normal = ExtResource("5_7qbcm")
 texture_hover = ExtResource("6_4cgsk")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_3721q")
+volume_db = -17.6
+autoplay = true
+
 [connection signal="animation_looped" from="MarginContainer/MenuAnimationLoop" to="." method="_on_menu_animation_loop_animation_looped"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
