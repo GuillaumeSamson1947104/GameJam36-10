@@ -72,11 +72,10 @@ position_smoothing_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Level/Node2D/Camera2D"]
 
 [node name="ColorRect" type="ColorRect" parent="Level/Node2D/Camera2D/CanvasLayer"]
-offset_left = -53.0
-offset_top = -106.0
-offset_right = 524.0
-offset_bottom = 217.0
-scale = Vector2(7.35372, 16.0065)
+offset_left = 251.0
+offset_top = 108.0
+offset_right = 828.0
+offset_bottom = 431.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 1, 1, 0)
@@ -110,7 +109,5 @@ texture = ExtResource("3_8ccde")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
-[connection signal="animation_finished" from="Level/Node2D/Camera2D/CanvasLayer/fadeToWhite" to="." method="_on_fade_to_white_animation_finished"]
-[connection signal="ready" from="Level/Node2D/Camera2D/CanvasLayer/fadeToWhite" to="." method="_on_fade_to_white_ready"]
 [connection signal="finished" from="Level/Node2D/PlayerSounds" to="Level/Node2D" method="_on_player_sounds_finished"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
