@@ -1,16 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dja0wvnhjvn0"]
+[gd_scene load_steps=9 format=3 uid="uid://dja0wvnhjvn0"]
 
 [ext_resource type="Script" path="res://Scenes/Level/wall_script.gd" id="1_bfbac"]
 [ext_resource type="PackedScene" uid="uid://rimbg85q70ho" path="res://Scenes/Player/node_2d.tscn" id="1_dei8l"]
+[ext_resource type="Script" path="res://Scenes/Level/level.gd" id="1_oiwem"]
 [ext_resource type="PackedScene" uid="uid://d21pavb5hefif" path="res://Scenes/World/world.tscn" id="2_357lf"]
 [ext_resource type="Texture2D" uid="uid://cimd3135o8set" path="res://assets/BackgroundCloud.png" id="3_8ccde"]
+[ext_resource type="Texture2D" uid="uid://dxn46lxxt6r1h" path="res://icon.svg" id="6_yntkq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f0r6n"]
 normal = Vector2(0, -7.51)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kk46u"]
+a = Vector2(329, 2)
+b = Vector2(-312, 3)
+
 [node name="Main" type="Node2D"]
 
 [node name="Level" type="Node2D" parent="."]
+script = ExtResource("1_oiwem")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Level"]
 script = ExtResource("1_bfbac")
@@ -20,7 +27,7 @@ position = Vector2(535, 458)
 shape = SubResource("WorldBoundaryShape2D_f0r6n")
 
 [node name="Node2D" parent="Level" instance=ExtResource("1_dei8l")]
-position = Vector2(832, -1152)
+position = Vector2(623, -566)
 collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 0.750492
@@ -31,18 +38,49 @@ zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 
+[node name="Level_change1" type="Area2D" parent="Level"]
+position = Vector2(591, -597)
+
+[node name="CollisionShape2D_1" type="CollisionShape2D" parent="Level/Level_change1"]
+shape = SubResource("SegmentShape2D_kk46u")
+
+[node name="Level_change2" type="Area2D" parent="Level"]
+position = Vector2(591, -499)
+
+[node name="CollisionShape2D_2" type="CollisionShape2D" parent="Level/Level_change2"]
+shape = SubResource("SegmentShape2D_kk46u")
+
 [node name="world" parent="." instance=ExtResource("2_357lf")]
 position = Vector2(544, 432)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+visible = false
+color = Color(0.15967, 0.15967, 0.15967, 1)
+
+[node name="layer_1" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-184, 0)
 motion_scale = Vector2(0.1, 0.1)
 motion_offset = Vector2(500, 500)
 motion_mirroring = Vector2(832, 704)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="background_1" type="Sprite2D" parent="ParallaxBackground/layer_1"]
 position = Vector2(728.14, 224)
 scale = Vector2(13.0044, 11)
 texture = ExtResource("3_8ccde")
+
+[node name="layer_2" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+position = Vector2(-184, 0)
+motion_scale = Vector2(0.1, 0.1)
+motion_offset = Vector2(500, 500)
+motion_mirroring = Vector2(832, 704)
+
+[node name="background_2" type="Sprite2D" parent="ParallaxBackground/layer_2"]
+position = Vector2(728.14, 224)
+scale = Vector2(13.0044, 11)
+texture = ExtResource("6_yntkq")
+
+[connection signal="area_entered" from="Level/Level_change1" to="Level" method="_on_level_change_1_area_entered"]
+[connection signal="area_entered" from="Level/Level_change2" to="Level" method="_on_level_change_2_area_entered"]
